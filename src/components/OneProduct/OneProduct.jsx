@@ -1,61 +1,135 @@
-// import React from 'react'
-import './OneProduct.css'
+import { useState } from "react";
+import "./OneProduct.css";
+import { useLocation } from "react-router-dom";
+import { products } from "../Data/Data";
+// import FeaturedProducts from "../FeaturedProducts/FeaturedProducts";
+
 const OneProduct = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [orderDetails, setOrderDetails] = useState({
+    productId: "",
+    productName: "",
+    // Add other order details here
+  });
+
+  let location = useLocation();
+  let currentId = location.pathname.split("/")[2];
+  let currentData = products.find((product) => product.id == currentId);
+
+  const handleBuyNow = () => {
+    setOrderDetails({
+      productId: currentData.id,
+      productName: currentData.title,
+      // Add other order details here
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setOrderDetails({
+      ...orderDetails,
+      [name]: value,
+    });
+  };
+
   return (
     <>
-   <section className="text-gray-600 body-font overflow-hidden">
+    <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
+        {/* Product details */}
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
-          <img 
-            alt="ecommerce" 
-            className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" 
-            src="https://dummyimage.com/400x400" 
+          <img
+            alt={currentData.title}
+            className="lg:w-1/2 w-full h-auto  object-cover object-center rounded"
+            src={currentData.images[0]}
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-            <h1 className="text-gray-900 text-3xl font-medium mb-1">The Catcher in the Rye</h1>
-            <p className="leading-relaxed">
-              Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY.
-              XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. 
-              Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.
-            </p>
+            <h1 className="text-gray-900 text-3xl font-medium mb-1">
+              {currentData.title}
+            </h1>
+            <p className="leading-relaxed">{currentData.description}</p>
+            <p className="leading-relaxed">Brand: {currentData.brand}</p>
+            <p className="leading-relaxed">Category: {currentData.category}</p>
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-              <div className="flex mr-3">
-                <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
-                <button className="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
-                <button className="border-2 border-gray-300 ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none"></button>
-              </div>
-              <div className="flex ml-6 items-center">
-                <div className="relative">
-                  <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-base pl-3 pr-10">
-                    <option>SM</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
-                  </select>
-                  <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4" viewBox="0 0 24 24">
-                      <path d="M6 9l6 6 6-6"></path>
-                    </svg>
-                  </span>
-                </div>
-              </div>
+              {/* Add options/buttons */}
             </div>
             <div className="flex">
-              <span className="font-medium text-2xl text-gray-900">$58.00</span>
-              <button className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Button</button>
-              <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
-                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                </svg>
+              <span className="font-medium text-2xl text-gray-900">
+                Rs. {currentData.price}
+              </span>
+              <button
+                onClick={handleBuyNow}
+                className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
+              >
+                Buy Now
               </button>
             </div>
           </div>
         </div>
+
+        {/* Modal for placing order */}
+        {isModalOpen && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <span className="modal-close" onClick={handleCloseModal}>
+                &times;
+              </span>
+              <h2>Place Order</h2>
+              <form>
+ 
+                  
+                {/* <label htmlFor="Name">Name:</label> */}
+                <input type="text" placeholder="Your Name" />
+          
+
+                
+            
+               <label htmlFor="Product ID">Product Id:</label>
+                <input
+                  type="text"
+                  name="productId"
+                  value={orderDetails.productId}
+                  onChange={handleChange}
+                  readOnly
+                />
+                <label htmlFor="Product Name">Product Name:</label>
+
+                <input
+                  type="text"
+                  name="productName"
+                  value={orderDetails.productName}
+                  onChange={handleChange}
+                  readOnly
+                />
+               
+
+                {/* <label htmlFor="email">Email:</label> */}
+                <input type="email" placeholder="Your email" />
+
+                {/* <label htmlFor="Phone">Phone:</label> */}
+                <input type="text" placeholder="YOur Contact Number" />
+
+                {/* <label htmlFor="Address">Address:</label> */}
+                <input type="text" placeholder="Your Address" />
+
+                {/* Add other input fields for order details */}
+                <button type="submit">Place Order</button>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </section>
-
+    <div className="featured">
+      {/* <FeaturedProducts/> */}
+    </div>
     </>
-  )
-}
+  );
+};
 
-export default OneProduct
+export default OneProduct;

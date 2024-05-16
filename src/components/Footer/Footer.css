@@ -1,4 +1,8 @@
 /* Footer.css */
+footer{
+  position: relative;
+  bottom: 0;
+}
 .text-gray-600 {
     color: #718096;
   }

@@ -58,7 +58,6 @@ const Navbar = () => {
         <input
           type="search"
           placeholder="Search products..."
-           
         />
         <Link to={`/search `}>
           <button>
