@@ -1,77 +1,34 @@
-/* Group container */
- 
-  
-  /* Aspect ratio container */
-  .aspect-h-1 {
-    height: 1em; /* Example height */
-  }
-  
-  .aspect-w-1 {
-    width: 1em; /* Example width */
-  }
-  
-  .xl\:aspect-h-8 {
-    height: 8em; /* Example height for extra large screens */
-  }
-  
-  .xl\:aspect-w-7 {
-    width: 7em; /* Example width for extra large screens */
-  }
-  
-  /* Image container */
-  .overflow-hidden {
-    overflow: hidden;
-  }
-  
-  .rounded-lg {
-    border-radius: 0.5rem; /* Example border radius */
-  }
-  
-  .bg-gray-200 {
-    background-color: #edf2f7; /* Example gray background */
-  }
-  
-  /* Image */
-  .object-cover {
-    object-fit: cover;
-  }
-  
-  .object-center {
-    object-position: center;
-  }
-  
-  .group-hover\:opacity-75:hover {
-    opacity: 0.75; /* Example opacity on hover */
-  }
-  
-  /* Product name */
-  .text-sm {
-    font-size: 0.875rem; /* Example small font size */
-  }
-  
-  .text-gray-700 {
-    color: #4a5568; /* Example gray text color */
-  }
-  
-  /* Product price */
-  .text-lg {
-    font-size: 1.125rem; /* Example large font size */
-  }
-  
-  .font-medium {
-    font-weight: 500; /* Example medium font weight */
-  }
-  
-  .text-gray-900 {
-    color: #2d3748; /* Example dark gray text color */
-  }
-  
-  /* Spacing */
-  .mt-4 {
-    margin-top: 1rem; /* Example top margin */
-  }
-  
-  .mt-1 {
-    margin-top: 0.25rem; /* Example top margin */
-  }
-  
+/* Style the search results page */
+.search-results {
+  padding: 20px;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.product-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.product-item img {
+  width: 100px;
+  height: auto;
+}
+
+.product-item h3 {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+.product-item p {
+  font-size: 1em;
+  color: #888;
+}

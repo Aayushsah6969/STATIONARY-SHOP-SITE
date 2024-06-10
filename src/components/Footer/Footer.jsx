@@ -16,7 +16,7 @@ const Footer = () => {
           <span className="ml-3 text-xl">Aayush Stationary</span>
         </a>
         <p className="text-sm text-gray-500 mt-4 md:mt-0 md:ml-4 md:border-l md:border-gray-200 md:py-2 md:pl-4">© 2024 Stationary —
-          <a href="https://twitter.com/knyttneve" className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@knyttneve</a>
+          <a href="https://twitter.com/knyttneve" className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@aayushsah</a>
         </p>
         <span className="inline-flex mt-4 md:mt-0 md:ml-auto justify-center">
           <a className="text-gray-500 ml-3">
